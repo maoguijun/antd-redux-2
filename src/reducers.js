@@ -19,7 +19,7 @@ function todos(state = [], action) {
         {
           text: action.text,
           completed: false
-        }
+        }//插入了这个对象，就是往state即store中插入了一条todo
       ]
     case COMPLETE_TODO:
       return [
@@ -38,5 +38,6 @@ const todoApp = combineReducers({
   visibilityFilter,
   todos
 })
+
 
 export default todoApp

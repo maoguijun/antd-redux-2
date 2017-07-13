@@ -8,13 +8,16 @@ import Footer from '../components/Footer'
 class App extends Component {
   render() {
     // Injected by connect() call:
+    console.log(this.props);
     const { dispatch, visibleTodos, visibilityFilter } = this.props
+    //onAddClick,onTodoClick,onFilterChange这三个事件都是用户自己定义的，react里面跟node一样可以自定义时间
     return (
       <div>
         <AddTodo
           onAddClick={text =>
             dispatch(addTodo(text))
           } />
+        {/*onAddClick在AddTodo方法里接收到了text，然后*/}
         <TodoList
           todos={visibleTodos}
           onTodoClick={index =>
@@ -56,6 +59,7 @@ function selectTodos(todos, filter) {
 // Which props do we want to inject, given the global state?
 // Note: use https://github.com/faassen/reselect for better performance.
 function select(state) {
+  console.log(state)
   return {
     visibleTodos: selectTodos(state.todos, state.visibilityFilter),
     visibilityFilter: state.visibilityFilter
@@ -63,4 +67,4 @@ function select(state) {
 }
 
 // 包装 component ，注入 dispatch 和 state 到其默认的 connect(select)(App) 中；
-export default connect(select)(App)
+export default connect(select)(App)//将dispatch 和state注入到App中方便子组件访问 

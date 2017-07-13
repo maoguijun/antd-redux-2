@@ -6,7 +6,7 @@ export default class AddTodo extends Component {
       <div>
         <input type='text' ref='input' />
         <button onClick={(e) => this.handleClick(e)}>
-          Add
+          Add Todo
         </button>
       </div>
     )
@@ -14,8 +14,9 @@ export default class AddTodo extends Component {
 
   handleClick(e) {
     const node = this.refs.input
-    const text = node.value.trim()
-    this.props.onAddClick(text)
+    console.log(node.value)
+    const text = node.value.trim()//不能直接node.value?貌似也能起作用。。。。trim()是es6提供的用来去除字符串前后空格的方法
+    this.props.onAddClick(text)//这里触发了AddTodo组件的onAddClick（时间名可以随便给，但是要语义化）事件，并把text传入
     node.value = ''
   }
 }
